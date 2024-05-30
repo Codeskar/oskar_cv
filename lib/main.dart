@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:animated_text_kit/animated_text_kit.dart';
+import 'project_page.dart';
 
 void main() {
   runApp(const MyApp());
@@ -29,6 +30,52 @@ class MyHomePage extends StatelessWidget {
       appBar: AppBar(
         title: const Text('My CV'),
       ),
+      drawer: Drawer(
+        child: ListView(
+          padding: EdgeInsets.zero,
+          children: <Widget>[
+            const DrawerHeader(
+              decoration: BoxDecoration(
+                color: Colors.blue,
+              ),
+              child: Text(
+                'Navigation',
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 24,
+                ),
+              ),
+            ),
+            ListTile(
+              leading: const Icon(Icons.home),
+              title: const Text('Home'),
+              onTap: () {
+                Navigator.pop(context);
+              },
+            ),
+            ListTile(
+              leading: const Icon(Icons.work),
+              title: const Text('Work Experience'),
+              onTap: () {
+                Navigator.pop(context);
+              },
+            ),
+            ListTile(
+              leading: const Icon(Icons.book),
+              title: const Text('Projects'),
+              onTap: () {
+                Navigator.pop(context);
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const ProjectPage(),
+                  ),
+                );
+              },
+            ),
+          ],
+        ),
+      ),
       body: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.all(16.0),
@@ -46,12 +93,12 @@ class MyHomePage extends StatelessWidget {
                 child: AnimatedTextKit(
                   animatedTexts: [
                     TypewriterAnimatedText(
-                      'Your Name',
+                      'Oskar Zieliński',
                       textStyle: const TextStyle(
                         fontSize: 32.0,
                         fontWeight: FontWeight.bold,
                       ),
-                      speed: const Duration(milliseconds: 200),
+                      speed: const Duration(milliseconds: 150),
                     ),
                     TypewriterAnimatedText(
                       'Flutter Developer',
@@ -59,7 +106,7 @@ class MyHomePage extends StatelessWidget {
                         fontSize: 24.0,
                         fontWeight: FontWeight.bold,
                       ),
-                      speed: const Duration(milliseconds: 200),
+                      speed: const Duration(milliseconds: 150),
                     ),
                   ],
                   totalRepeatCount: 1,
@@ -86,15 +133,6 @@ class MyHomePage extends StatelessWidget {
                 ),
               ),
               const WorkExperienceList(),
-              const SizedBox(height: 20),
-              const Text(
-                'Projects',
-                style: TextStyle(
-                  fontSize: 24,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-              const ProjectList(),
             ],
           ),
         ),
@@ -167,60 +205,6 @@ class WorkExperienceItem extends StatelessWidget {
             style: const TextStyle(
               fontSize: 16,
               color: Colors.grey,
-            ),
-          ),
-          Text(
-            description,
-            style: const TextStyle(fontSize: 16),
-          ),
-        ],
-      ),
-    );
-  }
-}
-
-class ProjectList extends StatelessWidget {
-  const ProjectList({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return const Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        ProjectItem(
-          projectName: 'Project A',
-          description: 'Description of the project...',
-        ),
-        ProjectItem(
-          projectName: 'Project B',
-          description: 'Description of the project...',
-        ),
-      ],
-    );
-  }
-}
-
-class ProjectItem extends StatelessWidget {
-  final String projectName;
-  final String description;
-
-  const ProjectItem({super.key, 
-    required this.projectName,
-    required this.description,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.only(bottom: 16.0),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(
-            projectName,
-            style: const TextStyle(
-              fontSize: 20,
-              fontWeight: FontWeight.bold,
             ),
           ),
           Text(
